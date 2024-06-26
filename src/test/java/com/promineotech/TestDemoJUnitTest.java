@@ -12,12 +12,15 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.doReturn;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.api.*;
 
 import java.util.stream.Stream;
 
@@ -25,6 +28,7 @@ import java.util.stream.Stream;
 class TestDemoJUnitTest {
 	
 	private TestDemo testDemo = new TestDemo();
+	private TestDemo mockDemo =  spy(testDemo);
 
 	@BeforeEach
 	void setUp() throws Exception {
@@ -90,6 +94,17 @@ class TestDemoJUnitTest {
 				);
 		//@formatter:on
 		
+	}
+	
+	/*
+	 * Step 4-2: Test for randNumberSquared tests return values for the getRandomInt() method.
+	 */
+	@Test
+	void assertThatNumberSquaredIsCorrect() {
+		doReturn(5).when(mockDemo).getRandomInt();
+		
+		int fiveSquared = mockDemo.randomNumberSquared();
+		assertThat(fiveSquared).isEqualTo(25);
 	}
 
 }

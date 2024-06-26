@@ -7,6 +7,8 @@
 */
 package com.promineotech;
 
+import java.util.Random;
+
 public class TestDemo {
 
 	
@@ -18,6 +20,7 @@ public class TestDemo {
 			throw new IllegalArgumentException("Both parameters must be positive!");
 		}
 	}
+	
 	
 	/*
 	 * This method accepts two parameters ( 'a' and 'b') both of type Double and
@@ -31,6 +34,19 @@ public class TestDemo {
 		else {
 			return  a/b;
 		}			
+	}
+	
+	
+	public int randomNumberSquared() {
+		int result = getRandomInt();
+		
+		return (result * result);
+	}
+	
+	public int getRandomInt() {
+		Random random = new Random();
+		
+		return random.nextInt(10) + 1;
 	}
 	
 }
