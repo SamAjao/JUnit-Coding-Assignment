@@ -43,6 +43,14 @@ class TestDemoJUnitTest {
 		}
 	}//End assertThatTwoPositiveNumbersAreAddedCorrectly()
 	
+	@Test
+	void assertThatPairsOfPositiveNumbersAreAddedCorrectly() {
+
+		assertThat(testDemo.addPositive(4,5)).isEqualTo(9);
+
+		assertThat(testDemo.addPositive(40,50)).isEqualTo(90);
+	}
+	
 	static Stream<Arguments>  argumentsForAddPositive() {
 		//@formatter:off
 		return Stream.of(
@@ -52,6 +60,33 @@ class TestDemoJUnitTest {
 				arguments(0,1,1,true),
 				arguments(1,0,1,true),
 				arguments(-1,-1,-2,true)
+				);
+		//@formatter:on
+		
+	}
+	
+	/*
+	 * This test asserts that two parameters of type Double are divided correctly and that
+	 * if a division-by-zero is attempted, an IllegalArgumentException is thrown.
+	 */
+	@ParameterizedTest
+	@MethodSource("com.promineotech.TestDemoJUnitTest#argumentsForDivideDoubles")
+	void assertThatTwoDoublesAreDividedCorrectly(Double a, Double b, Double expected, boolean expectedException) {
+		if(!expectedException) {
+			assertThat(testDemo.divideDoubles(a, b)).isEqualTo(expected);
+		}
+		else {
+			assertThatThrownBy(() ->testDemo.divideDoubles(a, b)).isInstanceOf(IllegalArgumentException.class);
+		}
+	}
+	
+	static Stream<Arguments>  argumentsForDivideDoubles() {
+		//@formatter:off
+		return Stream.of(
+				arguments(1.0,2.0,0.5,false),
+				arguments(1.0, 0.0, null, true),
+				arguments(-6.0, 2.0, -3.0, false),
+				arguments(-10.0, -2.0, 5.0, false)
 				);
 		//@formatter:on
 		

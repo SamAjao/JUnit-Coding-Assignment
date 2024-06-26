@@ -19,4 +19,18 @@ public class TestDemo {
 		}
 	}
 	
+	/*
+	 * This method accepts two parameters ( 'a' and 'b') both of type Double and
+	 * throws a IllegalArgumentException if 'b' is equal to zero and
+	 * returns the result of 'a' divided by 'b' otherwise.  
+	 */
+	public double divideDoubles(double a, double b) {		
+		if(b == 0) {
+			throw new IllegalArgumentException("Division by zero is not allowed!");
+		}
+		else {
+			return  a/b;
+		}			
+	}
+	
 }
